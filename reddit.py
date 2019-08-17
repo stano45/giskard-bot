@@ -32,4 +32,3 @@ class RedditScraper:
 			print("exception: BadRequest - bad request (remove /r)")
 		else:
 			print("Subreddit found.")
-		

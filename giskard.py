@@ -3,6 +3,7 @@ from reddit import RedditScraper
 import prawcore
 from datetime import datetime
 import config as cfg
+import twitch_scrape as twitch
 
 token = cfg.discord_token
 
@@ -22,7 +23,8 @@ async def on_message(message):
         return
 
     if message.content.startswith("!help"):
-        msg = "Commands: \n" + "!rhot [subreddit] " + "-- finds #1 hot post from subreddit that isn't stickied."
+        msg = "Commands: \n" + "!rhot [subreddit] -- finds #1 hot post from subreddit that isn't stickied.\n"\
+        					 + "!islive [streamer_name] -- checks if a given streamer is online.\n"
         await message.channel.send(msg)
 
     if message.content.startswith("!rhot"):
@@ -35,6 +37,16 @@ async def on_message(message):
             await message.channel.send("This is the #1 hot post from " + subreddit + ": \n" + msg)
         else:
             await message.channel.send("Sorry! Subreddit is private, or has not been found.")
+
+    if message.content.startswith("!islive"):
+    	channel = message.content[8:]
+    	info = twitch.is_live(channel)
+    	if info:
+    		msg = "Streamer is live @ " + info
+    	else:
+    		msg = "Streamer is offline at the moment."
+    	await message.channel.send(msg)
+
 
 
 client.run(token)
