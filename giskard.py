@@ -130,6 +130,14 @@ class Websites(commands.Cog):
 		else:
 			await ctx.send("Subreddit is private, or has not been found")
 
+	@commands.command(
+		name = 'watch2gether',
+		description = '!watch2gether -- displays link to watch2gether room')
+	async def watch2gether(self, ctx):
+		"""-- displays link to watch2gether room"""
+		msg = "Your watch2gether room: \n" + "https://www.watch2gether.com/rooms/jbsv91sambu14bcabl?lang=en"
+		await ctx.send(msg)
+
 
 token = cfg.discord_token
 bot = commands.Bot(command_prefix='!')
